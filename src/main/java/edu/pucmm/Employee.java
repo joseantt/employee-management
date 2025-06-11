@@ -61,7 +61,7 @@ public class Employee implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Employee employee)) return false;
 
-        return id.equals(employee.id);
+        return id.equals(employee.id) || name.equals(employee.name);
     }
 
     @Override

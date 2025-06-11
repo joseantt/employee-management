@@ -69,6 +69,8 @@ public class EmployeeManager {
     }
 
     public boolean isSalaryValidForPosition(Position position, double salary) {
+        if (position == null && salary < 0) return false;
+
         return salary >= position.getMinSalary() && salary <= position.getMaxSalary();
     }
 }
