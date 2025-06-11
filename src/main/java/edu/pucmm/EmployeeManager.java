@@ -20,7 +20,7 @@ public class EmployeeManager {
     }
 
     public void addEmployee(Employee employee) {
-        if (employees.contains(employee)) {
+        if (employees.contains(employee) || employees.stream().anyMatch(e -> e.getName().equals(employee.getName()))) {
             throw new DuplicateEmployeeException("Duplicate employee");
         }
         if (!isSalaryValidForPosition(employee.getPosition(), employee.getSalary())) {
@@ -70,6 +70,8 @@ public class EmployeeManager {
 
     public boolean isSalaryValidForPosition(Position position, double salary) {
         if (position == null && salary < 0) return false;
+
+        if (salary < position.getMinSalary() * 0.1) return false;
 
         return salary >= position.getMinSalary() && salary <= position.getMaxSalary();
     }
